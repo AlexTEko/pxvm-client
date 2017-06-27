@@ -61,5 +61,5 @@ if __name__ == '__main__':
         result = create_machine(args.name)
         if result.status_code == 200:
             result = result.json()
-            print('Hostname: ', result['config']['hostname'])
-            print('IP: ', result['ip'])
+            print('Hostname: {}'.format(result['config']['hostname']))
+            print('ssh root@{}'.format(result['ip']))
