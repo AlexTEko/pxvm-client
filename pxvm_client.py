@@ -27,12 +27,15 @@ def load_config():
 
 def create_machine(hostname):
     config = load_config()
+    data = dict()
     if hostname:
-        data = dict()
         data.setdefault('hostname', hostname)
     headers = {'Authorization': '{}:{}'.format(config.get('user'), config.get('password'))}
     response = requests.post('{}/api/lxc'.format(config.get('url')), headers=headers, json=data)
-    logging.debug(response.json())
+    if response.status_code == 200:
+        logging.debug(response.json())
+    else:
+        print(response)
     return response
 
 
